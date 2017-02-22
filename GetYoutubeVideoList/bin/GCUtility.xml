@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GCUtility</name>
+    </assembly>
+    <members>
+        <member name="T:GCU.Db">
+            <summary>
+            Classe per gestione funzioni su DB
+            </summary>
+        </member>
+        <member name="M:GCU.Db.GetConnection(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Restituisce una SqlConnection costruendo automaticamente una stringConnection dai parametri passati.
+            </summary>
+            <param name="dataSource"> è il server name di SQLServer. <para/>Es. nome_macchia\istanza (es. vespa\ieo).</param>
+            <param name="catalog">E' il nome del database</param>
+            <param name="integratedSecurity">True o False. Se non settato sarà False di default.</param>
+            <param name="userId">username di SQL Server.</param>
+            <param name="password">Password di SQL Server.</param>
+            <param name="multipleActiveResultSets">True o False. Se non settato sarà True di default.</param>
+            <returns>Restituisce una SqlConnection costruendo automaticamente una stringConnection dai parametri passati.</returns>
+        </member>
+        <member name="M:GCU.Db.GetConnection(System.String)">
+            <summary>
+            Restituisce una SqlConnection partendo da una stringConnection come parametro passato.
+            </summary>
+            <param name="connectionString">Stringa di connessione del tipo: <para/> "Data Source=xxxx;Initial Catalog=yyyy;Integrated Security=False;User ID=uuuuu;Password=ppppp;MultipleActiveResultSets=True;</param>
+            <returns></returns>
+        </member>
+        <member name="M:GCU.Db.getDataTableFrom_Select(System.Data.SqlClient.SqlConnection,System.String,System.String,System.String)">
+            <summary>
+            Effettua una SELECT sul DB.
+            </summary>
+            <param name="conn"> Connessione </param>
+            <param name="dataToExtract"></param>
+            <param name="tableName">Nome della tabella da cui estrarre i dati</param>
+            <param name="where">Condizione.<para/>Lasciare vuoto nel caso non servano condizioni</param>
+            <returns>Restituisce i sisultati della query all'interno di un DataTable </returns>
+        </member>
+        <member name="M:GCU.Db.getSqlDataReaderFrom_Select(System.Data.SqlClient.SqlConnection,System.String,System.String,System.String)">
+            <summary>
+            Effettua una SELECT sul DB.
+            </summary>
+            <param name="conn"> Connessione </param>
+            <param name="dataToExtract"></param>
+            <param name="tableName">Nome della tabella da cui estrarre i dati</param>
+            <param name="where">Condizione.<para/>Lasciare vuoto nel caso non servano condizioni</param>
+            <returns>Restituisce un SqlDataReader </returns>
+        </member>
+        <member name="M:GCU.Db.Insert(System.Data.SqlClient.SqlConnection,System.String)">
+            <summary>Effettua una Insert sul DB.</summary>
+            <param name="conn"> Connessione </param>
+            <param name="tableName">Nome della tabella da cui estrarre i dati</param>
+            <param name="where">Condizione.<para/>Lasciare vuoto nel caso non servano condizioni</param>
+            <returns>Restituisce il numero di righe che sono state inserite</returns>
+        </member>
+        <member name="M:GCU.Db.Update(System.Data.SqlClient.SqlConnection,System.String,System.String,System.String)">
+            <summary>
+            Effettua un Update sul DB restituendo il numero di righe modificate
+            </summary>
+            <param name="conn"> Connessione </param>
+            <param name="tableName">Nome della tabella da cui estrarre i dati</param>
+            <param name="data">Campi da settare</param>
+            <param name="where">Condizione.<para/>Lasciare vuoto nel caso non servano condizioni</param>
+            <returns>Restituisce il numero di righe che sono state inserite</returns>
+        </member>
+        <member name="T:GCU.Export">
+            <summary>
+            Classe per gestione Export
+            </summary>
+        </member>
+        <member name="M:GCU.Export.ExportToExcel(System.Data.DataTable,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Crea un file excel (preferibilmente .xlsx) partendo da un DataTable
+            </summary>
+            <param name="dt">Tabella di input da convertire in Excel</param>
+            <param name="path">Percorso + nome del file + estensione dove salvare il file.<para/>Consigliato salvare il file in .xlsx per evitare problemi di compatibilità. </param>
+            <param name="worksheetName">Nome del Foglio di Lavoro</param>
+            <param name="title">Titolo del documento</param>
+            <param name="author">Autore del documento</param>
+            <param name="company">Company di appartenenza dell'autore</param>
+            <returns>Restituisce True se il file viene esportato correttamente. Altrimenti restituisce False.</returns>
+        </member>
+        <member name="M:GCU.Export.ExportToCSV(System.Data.DataTable,System.String,System.Text.Encoding)">
+            <summary>
+            Crea un file excel (preferibilmente .xlsx) partendo da un DataTable
+            </summary>
+            <param name="dt">DataTable di input da cui generare il CSV</param>
+            <param name="path">Percorso + nome del file + estensione dove salvare il file.</param>
+            <param name="encoding"> Encoding utilizzato per salvare il file CSV. <para/>Consigliato salvare in Encoding.UTF8</param>
+            <returns></returns>
+        </member>
+        <member name="M:GCU.Export.ByteArrayToHexString(System.Byte[])">
+            <summary>
+            Converte un array di byte in stringa di formato HEXA
+            </summary>
+            <param name="ba">Array di Byte </param>
+            <returns>Restituisce una stringa in formato Hexa</returns>
+        </member>
+        <member name="T:GCU.Security">
+            <summary>
+            Classe per gestione metodi su Sicurezza
+            </summary>
+        </member>
+        <member name="M:GCU.Security.GetMD5Hash(System.String)">
+            <summary>
+            Restituisce un MD5 hash come stringa
+            </summary>
+            <param name="TextToHash">String to be hashed.</param>
+            <returns>Restituisce un hash come stringa.</returns>
+        </member>
+        <member name="M:GCU.Security.GenerateToken(System.Int32)">
+            <summary>
+            Restituisce un Token avente lunghezza specificata come parametro
+            </summary>
+            <param name="length">Lunghezza che dovrà avere il token restituito.</param>
+            <returns>Restituisce un Token avente lunghezza specificata come parametro</returns>
+        </member>
+        <member name="T:GCU.UtilityWeb">
+            <summary>
+            Classe per la gestione di metodi da usare nel Web
+            </summary>
+        </member>
+        <member name="M:GCU.UtilityWeb.SendMail(System.Net.Mail.MailAddress,System.Net.Mail.MailAddress,System.String,System.String,System.String,System.String,System.Net.Mail.Attachment[],System.Boolean,System.Boolean,System.Int32,System.Boolean,System.Int32,System.Boolean)">
+            <summary>
+            Permette l'invio Email
+            </summary>
+            <param name="from">Mittente</param>
+            <param name="toEmail">Destinatario</param>
+            <param name="subject">Oggetto</param>
+            <param name="msg">Corpo del messaggio</param>
+            <param name="username">Username con cui accedere al server SMTP</param>
+            <param name="password">Password con cui accedere al server SMTP</param>
+            <param name="isBodyHtml">Imposta il tipo di email da inviare. Se True, sarà in formato html. <para/>Default True</param>
+            <param name="useDefaultcredential">Default: False</param>
+            <param name="port">Porta SMTP. Settare a 0 per usare quella di default.</param>
+            <param name="enableSsl">Default: True</param>
+            <param name="timeout">Default: 1000</param>
+            <returns></returns>
+        </member>
+        <member name="M:GCU.UtilityWeb.IsValidEmailAddress(System.String)">
+            <summary>
+            Verifica se la stringa passata come input è un indirizzo email valido
+            </summary>
+            <param name="email">Indirizzo email</param>
+            <returns>Restituisce True se l'indirizzo passato in input è valido. Altrimenti restituisce False</returns>
+        </member>
+    </members>
+</doc>
